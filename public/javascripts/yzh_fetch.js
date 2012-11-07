@@ -12,6 +12,9 @@ var yzh_fetchDATA = {
 $(yzh_fetchDATA.init());
 (function (yzh_fetchDATA) {
     var xmlData;
+
+
+
     var loadModul = {
         loadingmode:2, //1图片自己转2图片为gif
 //        imagename:'../images/yzh_loading_images.png',
@@ -26,10 +29,11 @@ $(yzh_fetchDATA.init());
         loadingshowimg:$('#yzh_loadingimage'),
         n:0,
         flag:true,
-
         init:function () {
             if (!this.root || !this.root.length) {
-                this.root = $('<div id="yzh_forloadingshowdiv" style="height: 100%;width: 100%;z-index: 999;top:0;left:0; background:rgba(0,0,0,0.8); position:fixed;display:block;">' +
+                //display:none;
+                this.root = $('<div id="yzh_forloadingshowdiv" style="display:none; -webkit-transition: opacity 0.8s linear;' +
+                    '-moz-transition: opacity 0.8s linear; -o-transition: opacity 0.8s linear; -ms-transition: opacity 0.8s linear; height: 100%;width: 100%;z-index: 999;top:0;left:0; background:rgba(0,0,0,0.9); position:fixed;">' +
                     '<div style="height: 100%;width: 100%; display:-webkit-box;display:-moz-box;display:-o-box;display:-ms-box;display:box;' +
                     '-webkit-box-align: center; -moz-box-align: center;-o-box-align: center;-ms-box-align: center;box-align: center;' +
                     '-webkit-box-pack: center; -moz-box-pack: center;-o-box-pack: center;-ms-box-pack: center;box-pack: center;' +
@@ -42,6 +46,10 @@ $(yzh_fetchDATA.init());
                     '<span id="ajaxloader" style="vertical-align:middle;"> ' + this.loadinginfo + '</span></div>' + '</div> </div>'
                 );
                 this.root.appendTo($('body'));
+                this.root.on("touchstart touchmove touchend MSPointerDown MSPointerMove MSPointerUp", function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                });
                 if (!this.loadingshowimg || !this.loadingshowimg.length)
                     this.loadingshowimg = $('#yzh_loadingimage');
             }
@@ -112,7 +120,7 @@ $(yzh_fetchDATA.init());
     }
 
 
-    function getOnlyDATA(url, afterload, datamanage, title) {
+    function getOnlyDATA(url, afterload, datamanage,flag, title,urlindex) {
 
         loadModul.init();
 
@@ -127,42 +135,49 @@ $(yzh_fetchDATA.init());
 //                console.log('beforesend ');
 
 //                alert('readytogetdata');
-
+                if(flag)
                 loadModul.showloading();
             },
             success:function (data, textStatus) {
-                loadModul.hideloading();
-
 
                 if (title)
                     afterload(datamanage(data), title);
                 else
                     afterload(datamanage(data));
 
+                if(flag)
+                    loadModul.hideloading();
 //                forloadingshowdiv.css('display', 'none');
             },
             complete:function (XMLHttpRequest, textStatus) {
 //                console.log('complete');
+                if(flag)
+                    loadModul.hideloading();
             },
             error:function (XMLHttpRequest, textStatus, errorThrown) {
 //                console.log('error');
+                if(flag)
+                    loadModul.hideloading();
 
             }
         });
     }
 
-    function getDATA(url, afterload) {
-
+    function getDATA(url, afterload,flag) {
+        var showflag=false;
+        if(flag)showflag=flag;
         url = 'http://ciicdevelop1php.duapp.com/xd/api.php?t=xml&u=' + encodeURIComponent(url);
         var datamanage = function (data) {
 
             xmlData = data['item']
             return xmlData;
         }
-        getOnlyDATA(url, afterload, datamanage);
+        getOnlyDATA(url, afterload, datamanage,showflag);
     }
 
-    function getOneNewsList(urlindex, afterload) {
+    function getOneNewsList(urlindex, afterload,flag) {
+        var showflag=false;
+        if(flag)showflag=flag;
         var onedata = xmlData[urlindex];
         var title = onedata['title'];
         var url = onedata['url'];
@@ -171,7 +186,7 @@ $(yzh_fetchDATA.init());
         var datamanage = function (data) {
             return data;
         }
-        getOnlyDATA(url, afterload, datamanage, title);
+        getOnlyDATA(url, afterload, datamanage, showflag,title,urlindex);
     }
 
 

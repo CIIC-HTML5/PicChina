@@ -366,6 +366,7 @@ $(main_generate.init());
 
         );
         image_loader();
+        $('.outercontainer').css("opacity", "1");
         initView();
     }
 
@@ -406,9 +407,13 @@ function hideAnimation() {
 }
 ;
 function reFreshMain(theurl) {
-    yzh_fetchDATA.getDATA(theurl, main_generate.generateView);
-}
-;
+    $('.outercontainer').css("opacity", "0");
+    $('.outercontainer').on('webkitTransitionEnd mozTransitionEnd msTransitionEnd oTransitionEnd', function () {
+        yzh_fetchDATA.getDATA(theurl, main_generate.generateView, true);
+        $('.outercontainer').off('webkitTransitionEnd mozTransitionEnd msTransitionEnd oTransitionEnd');
+    });
+};
+
 $(document).ready(function () {
     columns(null, null);
     var XINWEN = "http://www.china.com.cn/photo/zhuanti/7121183.xml"; // 新闻
