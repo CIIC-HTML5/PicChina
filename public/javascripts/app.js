@@ -29,7 +29,9 @@ $(main_generate.init());
         var w = $(document).width();
         var h = $(document).height();
         $('.main').width(w);
+        $('.main').height(h);
         $('.list').width(w);
+        $('.list').height(h);
         // 初始化分屏效果 ScrollView
         $('.container').width(($('.list').length) * $('.list').width() + $('.main').width());
         // 局部的 ScrollView
