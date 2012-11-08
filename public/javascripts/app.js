@@ -1,5 +1,5 @@
 var main_generate = {
-    init:function () {
+    init: function() {
     }
 }
 $(main_generate.init());
@@ -22,6 +22,16 @@ $(main_generate.init());
 //    }
 
     function initView() {
+        $('.logo').on("touchstart touchmove touchend MSPointerDown MSPointerMove MSPointerUp", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        $('.logo').on('webkitTransitionEnd', function() {
+            $(this).css({'display': 'none'});
+        });
+        // 加载结束时触发
+        $('.logo').css({'opacity': 0});
+        
 //        image_loader();
         // 全屏的宽度与高度
         // 这里用来初始化
