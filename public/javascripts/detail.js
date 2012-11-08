@@ -158,7 +158,9 @@ var yxj_detail = {};
         setTransition("#yxjbottom");
         setDetailDivTransition("#yxjdetail");
 
-        $("#yxjpicturediv").on('touchstart touchmove touchend', function () {
+        $("#yxjpicturediv").on('touchstart touchmove touchend', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
             var touch = null;
             if (event.type == 'touchmove') {
                 velocitys++;

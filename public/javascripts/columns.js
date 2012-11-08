@@ -145,6 +145,7 @@ function setAnimate(bar, parent, malte) {
         "transition":"opacity .5s ease-out"})
     $(bar).on('touchend MSPointerUp', function (event) {
             event.preventDefault();
+            event.stopPropagation();
             if (flag == 0) {
                 $(parent).css({"-webkit-transform":"translate3d(0px," + childDivHeight + "px,0px)",
                     "-ms-transform":"translate3d(0px," + childDivHeight + "px,0px)"});
