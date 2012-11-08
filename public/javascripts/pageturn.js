@@ -145,8 +145,8 @@ function setChecked(id) {
 function setImgTouch(id, key) {
     var velocitys = 0;
     $('#yxjscroll-img-' + id).on("touchstart touchmove touchend MSPointerDown MSPointerMove MSPointerUp", function (event) {
-        event.preventDefault();
-        event.stopPropagation();
+//        event.preventDefault();
+//        event.stopPropagation();
         var touch = null;
         touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
         if (event.type == 'touchmove' || event.type == 'MSPointerMove') {

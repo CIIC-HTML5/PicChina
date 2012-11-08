@@ -13,6 +13,7 @@ var yxj_detail = {};
     var pageCount = 1;
     var datas = null;
     var touchs = null;
+    var flag = 0;
 
     function setTitle(title) {
         this.title = title;
@@ -61,6 +62,21 @@ var yxj_detail = {};
         });
     }
 
+//设置TRANSFORM过度
+    function clearTransition(dom) {
+        $(dom).css({"-webkit-transition":"all 0s ease-out",
+            "-moz-transition":"all 0s ease-out",
+            "-o-transition":"all 0s ease-out",
+            "-ms-transition":"all 0s ease-out",
+            "transition":"all 0s ease-out",
+            "-webkit-transform-style":"preserve-3d",
+            "-moz-transform-style":"preserve-3d",
+            "-o-transform-style":"preserve-3d",
+            "-ms-transform-style":"preserve-3d",
+            "transform-style":"preserve-3d"
+        });
+    }
+
 //设置透明相应过度
     function setDetailDivTransition(dom) {
         $(dom).css({"-webkit-transition":"opacity .5s ease-out",
@@ -68,6 +84,21 @@ var yxj_detail = {};
             "-o-transition":"opacity .5s ease-out",
             "-ms-transition":"opacity .5s ease-out",
             "transition":"opacity .5s ease-out",
+            "-webkit-transform-style":"preserve-3d",
+            "-moz-transform-style":"preserve-3d",
+            "-o-transform-style":"preserve-3d",
+            "-ms-transform-style":"preserve-3d",
+            "transform-style":"preserve-3d"
+        });
+    }
+
+//设置透明相应过度
+    function clearDetailDivTransition(dom) {
+        $(dom).css({"-webkit-transition":"opacity 0s ease-out",
+            "-moz-transition":"opacity 0s ease-out",
+            "-o-transition":"opacity 0s ease-out",
+            "-ms-transition":"opacity 0s ease-out",
+            "transition":"opacity 0s ease-out",
             "-webkit-transform-style":"preserve-3d",
             "-moz-transform-style":"preserve-3d",
             "-o-transform-style":"preserve-3d",
@@ -92,9 +123,14 @@ var yxj_detail = {};
     }
 
     //异步加载图片
-    function loadingImg(dom, url) {
+    function loadingImg(dom, url, key) {
         $(dom).load(url, function () {
             $(dom).attr("src", url);
+            if (key == 0) {
+                $(dom).ready(function () {
+                    setDetailAnimation();
+                });
+            }
         });
     }
 
@@ -108,7 +144,6 @@ var yxj_detail = {};
     function main(data, titles) {
         datas = data;
         title = titles;
-//        $("#yxjpicturediv").css("left","0")
         setPicDivWidth("#yxjpicturediv", data.items.length);
         setAnimate();
         setBack();
@@ -139,8 +174,9 @@ var yxj_detail = {};
                 "'>" +
                 "</div>";
             $(tag).appendTo("#yxjpicturediv");
-            loadingImg("#yxjbgimg" + key, value.lurl);
+            loadingImg("#yxjbgimg" + key, value.lurl, key);
             if (key == 0) {
+                $("#yxjup").empty();
                 $("#yxjup").text(title + "(" + currentPage + "/" + pageCount + ")");
                 $("#yxjdetail").text(value.desc);
             }
@@ -153,7 +189,6 @@ var yxj_detail = {};
 //设置点击大图时顶部、底部、描述层的过度效果
     function setAnimate() {
         var velocitys = 0;
-        var flag = 0;
         setTransition("#yxjtop");
         setTransition("#yxjbottom");
         setDetailDivTransition("#yxjdetail");
@@ -168,12 +203,12 @@ var yxj_detail = {};
             if (event.type == 'touchend') {
                 if (velocitys < 2) {
                     if (flag == 0) {
-                        setTransform("#yxjtop", -100);
-                        setTransform("#yxjbottom", 150);
-                        setOpacity("#yxjdetail", 0);
-                    } else {
                         setTransform("#yxjtop", 0);
                         setTransform("#yxjbottom", 0);
+                        setOpacity("#yxjdetail", 0);
+                    } else {
+                        setTransform("#yxjtop", 100);
+                        setTransform("#yxjbottom", -150);
                         $("#yxjdetail").css("z-index", "1");
                         setOpacity("#yxjdetail", 0.5);
                     }
@@ -222,15 +257,23 @@ var yxj_detail = {};
             clear();
         });
     }
+
 //设置返回按钮
-    function clear(){
+    function clear() {
+        flag = 0;
         $("#yxjpicturediv").empty();
         $("#yxjup").empty();
         $("#yxjdetail").empty();
         $("#yxjbottom").empty();
         $("#yxjpicturediv").empty();
         $("#yxjpicturediv").html("");
-        $("#yxjpicturedivs img").css("src","./images/loading_circle.gif");
+        $("#yxjdetail").off("webkitTransitionEnd");
+        $(".detail").css({"opacity":"0"});
+        $("#yxjdetail").css("z-index", "-1");
+        setTransform("#yxjtop", 0);
+        setTransform("#yxjbottom", 0);
+        setOpacity("#yxjdetail", 0);
+        $("#yxjpicturedivs img").css("src", "./images/loading_circle.gif");
 //            alert($("#yxjpicturediv").html());
         touchs = null;
         currentPage = 1;
@@ -253,9 +296,29 @@ var yxj_detail = {};
             "transform":"translate3d(" + (0) + "px,0px,0px)"
         });
     }
+
+    function setDetailAnimation() {
+        $(".detail").off("webkitTransitionEnd");
+        $(".detail").css({"opacity":"1"});
+//        $(".detail").on("webkitTransitionEnd",function(e){
+
+        setTransform("#yxjbottom", -150);
+        $("#yxjdetail").css("z-index", "1");
+        setOpacity("#yxjdetail", 0.5);
+        flag = 1;
+//        });
+    }
+
+    function setTopTransition() {
+        setTransition("#yxjtop");
+        setTransform("#yxjtop", 100);
+        $("#yxjup").html("<img src='./images/loading_circle.gif' width='50px' height='50px'/>");
+    }
+
     yxj_detail.main = main;
     yxj_detail.setAnimate = setAnimate;
     yxj_detail.setMove = setMove;
     yxj_detail.setBack = setBack;
     yxj_detail.clear = clear;
+    yxj_detail.setTopTransiton = setTopTransition;
 })(yxj_detail);
