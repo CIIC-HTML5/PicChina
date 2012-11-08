@@ -254,7 +254,7 @@ $(main_generate.init());
                 showani.css({
                     'top':t + 'px', 'left':l + 'px', 'width':thisimg.width() + 'px', 'height':thisimg.height() + 'px'});
 
-                showani.css("display", "block");
+                showani.css("opacity", "1");
                 showani.css({'z-index':'3',
                     '-webkit-transform':'matrix(' + width + ',0,0,' + height + ',-' + l + ',-' + t + ')'});
 
@@ -269,7 +269,7 @@ $(main_generate.init());
         $('#showanimation').on('webkitTransitionEnd', function () {
 //            alert("excute");
             if (showAnimationFlag) {
-//                $('#showanimation').css("display", "none");
+                $('#showanimation').css("opacity", "0");
             } else {
                 $('.detail').css({"z-index":"3", "display":"block"});
                 showDetails(showIndex);
