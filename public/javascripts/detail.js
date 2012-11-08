@@ -127,8 +127,24 @@ var yxj_detail = {};
         $(dom).load(url, function () {
             $(dom).attr("src", url);
             if (key == 0) {
-                $(dom).ready(function () {
+                $(dom).on(function () {
                     setDetailAnimation();
+                });
+            }
+        });
+    }
+
+    //异步加载图片
+    function loadingImgs(dom, url, key, data) {
+        $(dom).load(url, function () {
+            $(dom).attr("src", url);
+            if (key == 0) {
+                setDetailAnimation();
+                $("#yxjup").empty();
+                $("#yxjup").text(title + "(" + currentPage + "/" + pageCount + ")");
+                $("#yxjdetail").text(value.desc);
+                $.each(data.items, function (key, value) {
+                    loadingImg("#yxjbgimg" + key, value.lurl, key);
                 });
             }
         });
@@ -174,11 +190,8 @@ var yxj_detail = {};
                 "'>" +
                 "</div>";
             $(tag).appendTo("#yxjpicturediv");
-            loadingImg("#yxjbgimg" + key, value.lurl, key);
             if (key == 0) {
-                $("#yxjup").empty();
-                $("#yxjup").text(title + "(" + currentPage + "/" + pageCount + ")");
-                $("#yxjdetail").text(value.desc);
+                loadingImgs("#yxjbgimg" + key, value.lurl, key, data);
             }
         });
         analyticData(null, datas.items, "#yxjbottom");
@@ -298,7 +311,7 @@ var yxj_detail = {};
     }
 
     function setDetailAnimation() {
-        $(".detail").off("webkitTransitionEnd");
+//        $(".detail").off("webkitTransitionEnd");
         $(".detail").css({"opacity":"1"});
 //        $(".detail").on("webkitTransitionEnd",function(e){
 
@@ -310,9 +323,9 @@ var yxj_detail = {};
     }
 
     function setTopTransition() {
+        $("#yxjup").html("<img src='./images/loading_circle.gif' width='50px' height='50px'/>");
         setTransition("#yxjtop");
         setTransform("#yxjtop", 100);
-        $("#yxjup").html("<img src='./images/loading_circle.gif' width='50px' height='50px'/>");
     }
 
     yxj_detail.main = main;

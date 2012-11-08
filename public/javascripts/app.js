@@ -66,6 +66,9 @@ $(main_generate.init());
         // mousedown 事件，按下后绑定移动事件，尝试对应 touchstart
         screenCtn.on('touchstart', function (e) {
 //            var eDown = e;
+            e.preventDefault();
+            e.stopPropagation();
+
             var eDown = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
             ;
             // 初始化
@@ -77,7 +80,8 @@ $(main_generate.init());
                 '-ms-transition':'all 0s linear'});
 
             screenCtn.on('touchmove', function (e) {
-
+                e.preventDefault();
+                e.stopPropagation();
                 var eMove = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
                 ;
 //                    e;
@@ -93,7 +97,8 @@ $(main_generate.init());
 
         // mouseup 事件，抬起后取消移动事件，尝试对应 touchend
         screenCtn.on('touchend', function (e) {
-
+            e.preventDefault();
+            e.stopPropagation();
             var eUp = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
             ;
 //                e;
@@ -233,10 +238,7 @@ $(main_generate.init());
 //        });
 
         $('.container img').on('touchend', function (e) {
-
             var eUp = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-            ;
-//                e;
             // 记录结尾的状态
             screenObj.endX = eUp.pageX;
             if (Math.abs(screenObj.endX - screenObj.startX) < 20) {
@@ -249,8 +251,8 @@ $(main_generate.init());
                 var showani = $('#showanimation');
 
 //            console.log(thisimg.attr('src')+' '+this.outerHTML);
-                showani.css({"background":"url("+thisimg.attr('src')+") no-repeat center","background-size":"100% 100%"});
-//                showani.html('<img src="' + thisimg.attr('src') + '" width="' + thisimg.width() + 'px" height="' + thisimg.height() + 'px" />');
+//                showani.css({"background":"url(" + thisimg.attr('src') + ") no-repeat center", "background-size":"100% 100%"});
+                showani.html('<img src="' + thisimg.attr('src') + '" width="' + thisimg.width() + 'px" height="' + thisimg.height() + 'px" />');
                 $('#showanimation img').css('opacity', '1');
                 showani.css({
                     'top':t + 'px', 'left':l + 'px', 'width':thisimg.width() + 'px', 'height':thisimg.height() + 'px'});
@@ -415,7 +417,8 @@ function reFreshMain(theurl) {
         yzh_fetchDATA.getDATA(theurl, main_generate.generateView, true);
         $('.outercontainer').off('webkitTransitionEnd mozTransitionEnd msTransitionEnd oTransitionEnd');
     });
-};
+}
+;
 
 $(document).ready(function () {
     columns(null, null);
