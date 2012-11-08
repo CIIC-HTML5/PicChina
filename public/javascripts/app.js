@@ -1,5 +1,5 @@
 var main_generate = {
-    init:function () {
+    init: function() {
     }
 }
 $(main_generate.init());
@@ -22,6 +22,7 @@ $(main_generate.init());
 //    }
 
     function initView() {
+        AppInit.initEnd();
 //        image_loader();
         // 全屏的宽度与高度
         // 这里用来初始化
