@@ -101,17 +101,6 @@ li img {
     color: #fff;
     background: #000;
     z-index: -1;
-    opacity: 0;
-    -webkit-transition:opacity 0.5s ease-in;
-    -moz-transition:opacity 0.8s ease-in;
-    -o-transition:opacity 0.8s ease-in;
-    -ms-transition:opacity 0.8s ease-in;
-    transition:opacity 0.8s ease-in;
-    -webkit-transform-style:preserve-3d;
-    -moz-transform-style:preserve-3d;
-    -o-transform-style:preserve-3d;
-    -ms-transform-style:preserve-3d;
-    transform-style:preserve-3d;
 }
 
 .wrap {

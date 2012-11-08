@@ -144,7 +144,8 @@ var yxj_detail = {};
                 $("#yxjup").text(title + "(" + currentPage + "/" + pageCount + ")");
                 $("#yxjdetail").text(value.desc);
                 $.each(data.items, function (key, value) {
-                    loadingImg("#yxjbgimg" + key, value.lurl, key);
+                    if (key != 0)
+                        loadingImg("#yxjbgimg" + key, value.lurl, key);
                 });
             }
         });
@@ -164,7 +165,7 @@ var yxj_detail = {};
         setAnimate();
         setBack();
         $.each(data.items, function (key, value) {
-            var tag = "<div id=\"yxjpicturedivs" + key + "\" style='height:100%;" +
+            var tag = "<div id=\"yxjpicturedivs" + key + "\" style=' background: url(../images/loading_circle.gif) no-repeat center;height:100%;" +
                 "display: -webkit-box;" +
                 "-webkit-box-orient: horizontal;" +
                 "-webkit-box-pack: center;" +
@@ -185,14 +186,16 @@ var yxj_detail = {};
                 "box-orient: horizontal;" +
                 "box-pack: center;" +
                 "float:left;width:" + $("body").width() + "px;height:100%;margin-bottom:-120px'>" +
-                "<img id=\"yxjbgimg" + key + "\" src=\"./images/loading_circle.gif\" style='max-width:" + $("body").width() + "px;" +
+                "<img id=\"yxjbgimg" + key + "\" src=\""+value.lurl+"\" style='max-width:" + $("body").width() + "px;" +
                 "max-height:" + $("body").height() + "px" +
-                "'>" +
+                "' alt=\"正在努力加载，请稍后。。。\">" +
                 "</div>";
             $(tag).appendTo("#yxjpicturediv");
-            if (key == 0) {
-                loadingImgs("#yxjbgimg" + key, value.lurl, key, data);
-            }
+            setDetailAnimation();
+            $("#yxjup").empty();
+            $("#yxjup").text(title + "(" + currentPage + "/" + pageCount + ")");
+            $("#yxjdetail").text(value.desc);
+//            }
         });
         analyticData(null, datas.items, "#yxjbottom");
         touchs = new touchClass();

@@ -150,6 +150,8 @@ function setImgTouch(id, key) {
         var touch = null;
         touch = event.originalEvent.touches[0] || event.originalEvent.changedTouches[0];
         if (event.type == 'touchmove' || event.type == 'MSPointerMove') {
+//            event.preventDefault();
+//            event.stopPropagation();
             velocitys++;
         }
         if (event.type == 'touchend' || event.type == 'MSPointerUp') {
