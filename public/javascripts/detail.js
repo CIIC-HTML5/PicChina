@@ -334,6 +334,10 @@ var yxj_detail = {};
         $("#yxjup").html("<img src='./images/loading_circle.gif' width='50px' height='50px'/>");
         setTransition("#yxjtop");
         setTransform("#yxjtop", 100);
+        $("#yxjbottom").on("touchmove",function(e){
+            e.preventDefault();
+            e.stopPropagation();
+        })
     }
 
     yxj_detail.main = main;
