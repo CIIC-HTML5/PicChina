@@ -165,38 +165,43 @@ var yxj_detail = {};
         setAnimate();
         setBack();
         $.each(data.items, function (key, value) {
-            var tag = "<div id=\"yxjpicturedivs" + key + "\" style=' background: url(../images/loading_circle.gif) no-repeat center;height:100%;" +
-                "display: -webkit-box;" +
-                "-webkit-box-orient: horizontal;" +
-                "-webkit-box-pack: center;" +
-                "-webkit-box-align: center;" +
-                "display: -moz-box;" +
-                "-moz-box-orient: horizontal;" +
-                "-moz-box-pack: center;" +
-                "-moz-box-align: center;" +
-                "display: -o-box;" +
-                "-o-box-orient: horizontal;" +
-                "-o-box-pack: center;" +
-                "-o-box-align: center;" +
-                "display: -ms-box;" +
-                "-ms-box-orient: horizontal;" +
-                "-ms-box-pack: center;" +
-                "-ms-box-align: center;" +
-                "display: box;" +
-                "box-orient: horizontal;" +
-                "box-pack: center;" +
-                "float:left;width:" + $("body").width() + "px;height:100%;margin-bottom:-120px'>" +
-                "<img id=\"yxjbgimg" + key + "\" src=\""+value.lurl+"\" style='max-width:" + $("body").width() + "px;" +
-                "max-height:" + $("body").height() + "px" +
-                "' alt=\"正在努力加载，请稍后。。。\">" +
-                "</div>";
-            $(tag).appendTo("#yxjpicturediv");
-            setDetailAnimation();
-            $("#yxjup").empty();
-            $("#yxjup").text(title + "(" + currentPage + "/" + pageCount + ")");
-            $("#yxjdetail").text(value.desc);
+                var tag = "<div id=\"yxjpicturedivs" + key + "\" style=' background: url(../images/loading_circle.gif) no-repeat center;height:100%;" +
+                    "display: -webkit-box;" +
+                    "-webkit-box-orient: horizontal;" +
+                    "-webkit-box-pack: center;" +
+                    "-webkit-box-align: center;" +
+                    "display: -moz-box;" +
+                    "-moz-box-orient: horizontal;" +
+                    "-moz-box-pack: center;" +
+                    "-moz-box-align: center;" +
+                    "display: -o-box;" +
+                    "-o-box-orient: horizontal;" +
+                    "-o-box-pack: center;" +
+                    "-o-box-align: center;" +
+                    "display: -ms-box;" +
+                    "-ms-box-orient: horizontal;" +
+                    "-ms-box-pack: center;" +
+                    "-ms-box-align: center;" +
+                    "display: box;" +
+                    "box-orient: horizontal;" +
+                    "box-pack: center;" +
+                    "float:left;width:" + $("body").width() + "px;height:100%;margin-bottom:-120px'>" +
+                    "<img id=\"yxjbgimg" + key + "\" src=\"" + value.lurl + "\" style='max-width:" + $("body").width() + "px;" +
+                    "max-height:" + $("body").height() + "px" +
+                    "' alt=\"正在努力加载，请稍后。。。\">" +
+                    "</div>";
+                $(tag).appendTo("#yxjpicturediv");
+                if (key == 0) {
+                    setDetailAnimation();
+                    $("#yxjup").empty();
+                    $("#yxjup").text(title + "(" + currentPage + "/" + pageCount + ")");
+                    $("#yxjdetail").text(value.desc);
+                }
 //            }
-        });
+            }
+
+        )
+        ;
         analyticData(null, datas.items, "#yxjbottom");
         touchs = new touchClass();
         touchs.touch("#yxjpicturediv", data.items.length, $("body").width(), action);
@@ -233,6 +238,7 @@ var yxj_detail = {};
             }
         });
 //设置当过度事件完成时描述层的Z—INDEX
+        $("#yxjdetail").off("webkitTransitionEnd");
         $("#yxjdetail").on("webkitTransitionEnd msTransitionEnd oTransitionEnd mozTransitionEnd TransitionEnd", function () {
             if (flag == 0) {
                 $("#yxjdetail").css("z-index", "-1");
@@ -256,7 +262,7 @@ var yxj_detail = {};
         });
     }
 
-    //设置小图点击大图联动事件
+//设置小图点击大图联动事件
     function setMove(key) {
 //        alert(key);
         var move = -(key) * $("body").width();
@@ -266,7 +272,7 @@ var yxj_detail = {};
         action(key + 1);
     }
 
-    //设置返回按钮事件
+//设置返回按钮事件
     function setBack() {
         $(".yxjback").on('touchend MSPointerUp', function () {
             hideAnimation();
@@ -283,7 +289,6 @@ var yxj_detail = {};
         $("#yxjbottom").empty();
         $("#yxjpicturediv").empty();
         $("#yxjpicturediv").html("");
-        $("#yxjdetail").off("webkitTransitionEnd");
         $(".detail").css({"opacity":"0"});
         $("#yxjdetail").css("z-index", "-1");
         setTransform("#yxjtop", 0);
@@ -337,4 +342,5 @@ var yxj_detail = {};
     yxj_detail.setBack = setBack;
     yxj_detail.clear = clear;
     yxj_detail.setTopTransiton = setTopTransition;
-})(yxj_detail);
+})
+    (yxj_detail);
