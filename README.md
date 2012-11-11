@@ -1,12 +1,12 @@
 PicChina
 ========
-public: ÍøÒ³Ó¦ÓÃ³ÌĞò
+public: ç½‘é¡µåº”ç”¨ç¨‹åº
 
-index.html: Ó¦ÓÃÒ³Ãæ
+index.html: åº”ç”¨é¡µé¢
 
-javascripts: ½Å±¾
-app.js: Ö÷Ó¦ÓÃ
-appInit.js: ½ø³¡¶¯»­
+javascripts: è„šæœ¬
+app.js: ä¸»åº”ç”¨
+appInit.js: è¿›åœºåŠ¨ç”»
 yzh_fetch.js:
 pagesplit.js:
 pageturn.js:
