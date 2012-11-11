@@ -6,32 +6,30 @@
  * To change this template use File | Settings | File Templates.
  */
 var yzh_fetchDATA = {
-    init:function () {
-    }
+    init: function() {}
 };
+
 $(yzh_fetchDATA.init());
-(function (yzh_fetchDATA) {
+
+(function(yzh_fetchDATA) {
+    
     var xmlData;
-
-
-
+    
     var loadModul = {
-        loadingmode:2, //1图片自己转2图片为gif
-//        imagename:'../images/yzh_loading_images.png',
-        imagename:'../images/loading_circle.gif',
-        rate:540,
-
-
-        loadinginfo:'loading...',
-
-
-        root:$('#yzh_forloadingshowdiv'),
-        loadingshowimg:$('#yzh_loadingimage'),
-        n:0,
-        flag:true,
-        init:function () {
-            if (!this.root || !this.root.length) {
-                //display:none;
+        /**
+         * 1 图片自己转
+         * 2 图片为gif
+         */
+        loadingmode: 2,
+        imagename: '../images/loading_circle.gif',
+        rate: 540,
+        loadinginfo: 'loading...',
+        root: $('#yzh_forloadingshowdiv'),
+        loadingshowimg: $('#yzh_loadingimage'),
+        n: 0,
+        flag: true,
+        init: function() {
+            if (! this.root || ! this.root.length) {
                 this.root = $('<div id="yzh_forloadingshowdiv" style="display:none; -webkit-transition: opacity 0.8s linear;' +
                     '-moz-transition: opacity 0.8s linear; -o-transition: opacity 0.8s linear; -ms-transition: opacity 0.8s linear; height: 100%;width: 100%;z-index: 999;top:0;left:0; background:rgba(0,0,0,0.9); position:fixed;">' +
                     '<div style="height: 100%;width: 100%; display:-webkit-box;display:-moz-box;display:-o-box;display:-ms-box;display:box;' +
@@ -46,153 +44,116 @@ $(yzh_fetchDATA.init());
                     '<span id="ajaxloader" style="vertical-align:middle;"> ' + this.loadinginfo + '</span></div>' + '</div> </div>'
                 );
                 this.root.appendTo($('body'));
-                this.root.on("touchstart touchmove touchend MSPointerDown MSPointerMove MSPointerUp", function (event) {
+                this.root.on("touchstart touchmove touchend MSPointerDown MSPointerMove MSPointerUp", function(event) {
                     event.preventDefault();
                     event.stopPropagation();
                 });
-                if (!this.loadingshowimg || !this.loadingshowimg.length)
+                if (! this.loadingshowimg || ! this.loadingshowimg.length) {
                     this.loadingshowimg = $('#yzh_loadingimage');
+                }
             }
         },
-        showloading:function () {
+        showloading: function() {
             if (this.loadingmode == 1) {
                 this.startRotate();
             } else if (this.loadingmode == 2) {
                 this.root.css('display', 'block');
             }
         },
-        hideloading:function () {
+        hideloading: function() {
             if (this.loadingmode == 1) {
                 this.stopRotate();
             } else if (this.loadingmode == 2) {
                 this.root.css('display', 'none');
             }
-
         },
-        showinfo:function () {
-            if (!loadModul.loadingshowimg)
+        showinfo: function() {
+            if (! loadModul.loadingshowimg) {
                 alert('null');
-            else alert('done');
+            } else {
+                alert('done');
+            }
         },
-        startRotate:function () {
+        startRotate: function() {
             this.flag = true;
             this.root.css('display', 'block');
             if (loadModul.loadingshowimg.length) {
-
                 this.n = 0;
                 loadModul.loadingshowimg.css('transform', 'rotate(0deg)');
                 setTimeout(this.goRotate, 100);
             }
-
         },
-
-        stopRotate:function () {
+        stopRotate: function() {
             this.flag = false;
             this.root.css('display', 'none');
         },
-
-        goRotate:function () {
+        goRotate: function() {
             loadModul.n = loadModul.n + 1;
             if (loadModul.loadingshowimg.length && loadModul.flag) {
-//            loadingshowimg.css('transition-duration','0s');
-//            loadingshowimg.css('transform','rotate(' +
-//                '0deg)');
-//            loadingshowimg.css('transition-duration','2s');
-//            loadingshowimg.css({
-//                '-webkit-transition':'all 2s linear',
-//                '-moz-transition':'all 2s linear',
-//                '-o-transition':'all 2s linear',
-//                '-ms-transition':'all 2s linear',
-//                'transition':'all 2s linear',
-//                '-webkit-transform':'rotate(90deg)',
-//                '-moz-transform':'rotate(90deg)',
-//                '-o-transform':'rotate(90deg)',
-//                '-ms-transform':'rotate(90deg)',
-//                'transform':'rotate(90deg)'
-//            });
-
-                loadModul.loadingshowimg.css('transform', 'rotate(' +
-                    (loadModul.rate * loadModul.n) + 'deg)');
+                loadModul.loadingshowimg.css('transform', 'rotate(' + (loadModul.rate * loadModul.n) + 'deg)');
                 setTimeout(loadModul.goRotate, 1000);
             }
-
         }
     }
-
-
-    function getOnlyDATA(url, afterload, datamanage,flag, title,urlindex) {
-
+    
+    function getOnlyDATA(url, afterload, datamanage,flag, title, urlindex) {
         loadModul.init();
-
         inurl = url;
         $.support.cors = true;
         $.ajax({
-            url:inurl,
-            dataType:"json",
-            beforeSend:function (XMLHttpRequest) {
-
-//                alert('readytogetdata');
-//                console.log('beforesend ');
-
-//                alert('readytogetdata');
-                if(flag)
-                loadModul.showloading();
+            url: inurl,
+            dataType: "json",
+            beforeSend: function(XMLHttpRequest) {
+                if (flag) {
+                    loadModul.showloading();
+                }
             },
-            success:function (data, textStatus) {
-
-                if (title)
+            success: function(data, textStatus) {
+                if (title) {
                     afterload(datamanage(data), title);
-                else
+                } else {
                     afterload(datamanage(data));
-
-                if(flag)
+                }
+                if (flag) {
                     loadModul.hideloading();
-//                forloadingshowdiv.css('display', 'none');
+                }
             },
-            complete:function (XMLHttpRequest, textStatus) {
-//                console.log('complete');
-                if(flag)
+            complete: function(XMLHttpRequest, textStatus) {
+                if (flag) {
                     loadModul.hideloading();
+                }
             },
-            error:function (XMLHttpRequest, textStatus, errorThrown) {
-//                console.log('error');
-                if(flag)
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                if (flag) {
                     loadModul.hideloading();
-
+                }
             }
         });
     }
-
-    function getDATA(url, afterload,flag) {
-        var showflag=false;
-        if(flag)showflag=flag;
+    
+    function getDATA(url, afterload, flag) {
+        var showflag = flag ? flag : false;
         url = 'http://ciicdevelop1php.duapp.com/xd/api.php?t=xml&u=' + encodeURIComponent(url);
-        var datamanage = function (data) {
-
-            xmlData = data['item']
+        var datamanage = function(data) {
+            xmlData = data['item'];
             return xmlData;
         }
-        getOnlyDATA(url, afterload, datamanage,showflag);
+        getOnlyDATA(url, afterload, datamanage, showflag);
     }
-
-    function getOneNewsList(urlindex, afterload,flag) {
-        var showflag=false;
-        if(flag)showflag=flag;
+    
+    function getOneNewsList(urlindex, afterload, flag) {
+        var showflag = flag ? flag : false;
         var onedata = xmlData[urlindex];
         var title = onedata['title'];
         var url = onedata['url'];
         url = 'http://rank.china.com.cn:8080/iphone/json1.jsp?url=' + url;
         url = 'http://ciicdevelop1php.duapp.com/xd/api.php?u=' + encodeURIComponent(url);
-        var datamanage = function (data) {
+        var datamanage = function(data) {
             return data;
         }
-        getOnlyDATA(url, afterload, datamanage, showflag,title,urlindex);
+        getOnlyDATA(url, afterload, datamanage, showflag, title, urlindex);
     }
-
-
+    
     yzh_fetchDATA.getOneNewsList = getOneNewsList;
     yzh_fetchDATA.getDATA = getDATA;
-})
-    (yzh_fetchDATA);
-
-
+})(yzh_fetchDATA);

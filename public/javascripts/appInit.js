@@ -1,5 +1,6 @@
 (function(window, $) {
     var flag = true;
+    
     var AppInit = {
         init: function() {
             if (! flag) { return; }
@@ -19,6 +20,7 @@
             $('.logo').css({'opacity': 0});
         }
     };
+    
     window.AppInit = AppInit;
 })(window, jQuery);
 
