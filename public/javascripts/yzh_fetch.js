@@ -31,7 +31,8 @@ $(yzh_fetchDATA.init());
         init: function() {
             if (! this.root || ! this.root.length) {
                 this.root = $('<div id="yzh_forloadingshowdiv" style="display:none; -webkit-transition: opacity 0.8s linear;' +
-                    '-moz-transition: opacity 0.8s linear; -o-transition: opacity 0.8s linear; -ms-transition: opacity 0.8s linear; height: 100%;width: 100%;z-index: 999;top:0;left:0; background:rgba(0,0,0,0.9); position:fixed;">' +
+                    '-moz-transition: opacity 0.8s linear; -o-transition: opacity 0.8s linear; -ms-transition: opacity 0.8s linear; height: 100%;width: 100%;z-index: 999;top:0;left:0;' +
+                    'background: -webkit-gradient( linear, 0% 0%,100% 0%,color-stop(0, #333), color-stop(0.5, #999),color-stop(1, #333) ); position:fixed;">' +
                     '<div style="height: 100%;width: 100%; display:-webkit-box;display:-moz-box;display:-o-box;display:-ms-box;display:box;' +
                     '-webkit-box-align: center; -moz-box-align: center;-o-box-align: center;-ms-box-align: center;box-align: center;' +
                     '-webkit-box-pack: center; -moz-box-pack: center;-o-box-pack: center;-ms-box-pack: center;box-pack: center;' +
