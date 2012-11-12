@@ -87,7 +87,14 @@ li img { vertical-align: bottom; }
 .main, .list {
     float: left;
     display: inline;
-    background: #666;
+    background: -webkit-gradient(
+        linear,
+        0% 0%,
+        100% 0%,
+        color-stop(0, #333),
+        color-stop(0.5, #999),
+        color-stop(1, #333)
+    );
 }
 
 .main {}
@@ -97,6 +104,13 @@ li img { vertical-align: bottom; }
 .m-banner, .m-list, .l-list {
     overflow: hidden;
     margin: 0 auto;
+}
+
+.m-banner {
+    padding: 10px;
+    background: #EEE;
+    border-radius: 10px 0;
+    box-shadow: 0 0 20px #000;
 }
 
 .m-cur, .m-oth {
@@ -121,31 +135,29 @@ li img { vertical-align: bottom; }
 .m-itm li {
     float: left;
     display: inline;
-    padding: 10px 0;
+    padding: 15px 0;
 }
 
 .m-itm li img {
     margin: 0 auto;
     padding: 5px;
     background: #EEE;
-    border: 5px solid #333;
-    border-radius: 10px 0;
-    box-shadow: 5px 5px 5px #444;
+    border-radius: 7px 0;
+    box-shadow: 0 0 20px #000;
 }
 
 .l-itm li {
     float: left;
     display: inline;
-    padding: 10px 0;
+    padding: 15px 0;
 }
 
 .l-itm li img {
     margin: 0 auto;
     padding: 5px;
     background: #EEE;
-    border: 5px solid #333;
-    border-radius: 10px 0;
-    box-shadow: 5px 5px 5px #444;
+    border-radius: 7px 0;
+    box-shadow: 0 0 20px #000;
 }
 
 /*@media (min-width: 1024px) and (min-height: 768px) {*/
