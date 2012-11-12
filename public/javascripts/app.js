@@ -178,16 +178,16 @@ $(main_generate.init());
             // 第一页大图横滚
             if (i < 4) {
                 if (i == 0) {
-                    var $img = $('<li><img index="' + i + '" src="../images/loading_circle.gif" rlink="' + entity_picurl + '" /></li>');
+                    var $img = $('<li><span><img index="' + i + '" src="../images/loading_circle.gif" rlink="' + entity_picurl + '" /></span></li>');
                     $('.m-ctn').append($img);
                 } else {
-                    var $img = $('<li><img index="' + i + '" src="../images/loading_circle.gif" rlink="' + entity_picurl + '" /></li>');
+                    var $img = $('<li><span><img index="' + i + '" src="../images/loading_circle.gif" rlink="' + entity_picurl + '" /></span></li>');
                     $('.m-oth').append($img);
                 }
             }
             // 第一页列表信息
             if (i >= 4 && i <= 7) {
-                var $img = $('<li><img index="' + i + '" src="../images/loading_circle.gif" rlink="' + entity_picurl + '" /></li>');
+                var $img = $('<li><span><img index="' + i + '" src="../images/loading_circle.gif" rlink="' + entity_picurl + '" /></span></li>');
                 $('.m-itm').append($img);
             }
             // 第二页以后
@@ -203,7 +203,7 @@ $(main_generate.init());
                     $newul = $('<ul class="l-itm"></ul> ');
                     $newllist.append($newul);
                 }
-                var $img = $('<li><img index="' + i + '" src="../images/loading_circle.gif" rlink="' + entity_picurl + '" /></li>');
+                var $img = $('<li><span><img index="' + i + '" src="../images/loading_circle.gif" rlink="' + entity_picurl + '" /></span></li>');
                 $newul.append($img);
             }
         });

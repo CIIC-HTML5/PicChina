@@ -150,12 +150,17 @@ li img { vertical-align: bottom; }
     padding: 15px 0;
 }
 
-.m-itm li img {
+.m-itm li span {
     margin: 0 auto;
+    display: inline-block;
     padding: 5px;
     background: #EEE;
     border-radius: 7px 0;
     box-shadow: 0 0 20px #000;
+}
+
+.m-itm li img {
+    margin: 0 auto;
 }
 
 .l-itm li {
@@ -164,12 +169,17 @@ li img { vertical-align: bottom; }
     padding: 15px 0;
 }
 
-.l-itm li img {
+.l-itm li span {
     margin: 0 auto;
+    display: inline-block;
     padding: 5px;
     background: #EEE;
     border-radius: 7px 0;
     box-shadow: 0 0 20px #000;
+}
+
+.l-itm li img {
+    margin: 0 auto;
 }
 
 /*@media (min-width: 1024px) and (min-height: 768px) {*/
