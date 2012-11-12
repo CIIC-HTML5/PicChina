@@ -25,6 +25,25 @@ li img { vertical-align: bottom; }
     opacity: 1;
 }
 
+.homebg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background: -webkit-gradient(
+        linear,
+        0% 0%,
+        100% 0%,
+        color-stop(0, #333),
+        color-stop(0.5, #999),
+        color-stop(1, #333)
+    );
+    -webkit-transition: all .6s linear;
+    opacity: 1;
+}
+
 .opc {
     background: #000;
     opacity: 0.6;
@@ -58,6 +77,7 @@ li img { vertical-align: bottom; }
     position: fixed;
     height: 100%;
     width: 100%;
+    z-index: 2;
     overflow: hidden;
     -webkit-transition: opacity 0.8s linear;
     -moz-transition: opacity 0.8s linear;
@@ -87,14 +107,6 @@ li img { vertical-align: bottom; }
 .main, .list {
     float: left;
     display: inline;
-    background: -webkit-gradient(
-        linear,
-        0% 0%,
-        100% 0%,
-        color-stop(0, #333),
-        color-stop(0.5, #999),
-        color-stop(1, #333)
-    );
 }
 
 .main {}
