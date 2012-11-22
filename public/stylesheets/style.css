@@ -77,7 +77,7 @@ li img { vertical-align: bottom; }
     position: fixed;
     height: 100%;
     width: 100%;
-    z-index: 2;
+    z-index: 14;
     overflow: hidden;
     -webkit-transition: opacity 0.8s linear;
     -moz-transition: opacity 0.8s linear;

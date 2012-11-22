@@ -59,7 +59,7 @@ function complatePageProperty(data) {
 }
 
 // 加载scroll父层元素
-var parentDivZindex = 4;
+var parentDivZindex = 26;
 function makeParentDiv(dom) {
     $(dom).empty();
     var tag = "<div id='yxjscroll-parentDiv'></div>";
@@ -80,7 +80,7 @@ function makeParentDiv(dom) {
 }
 
 // 加载SCROLL层
-var childDivZindex = 5;
+var childDivZindex = 28;
 function makeChileDiv(dom) {
     var tag = "<div id='yxjscroll-childDiv'></div>";
     $(tag).appendTo(dom);
@@ -97,7 +97,7 @@ function makeChileDiv(dom) {
 // 加载左右提示按钮
 var leftPadding = 0; // 左提示按钮的边距
 var rightPadding = 0; // 右提示按钮的边距
-var directionZindex = 6; // 左右按钮在Z轴上的次序
+var directionZindex = 29; // 左右按钮在Z轴上的次序
 function makeLeftAndRightButtonDiv(dom) {
     var tag = "<div id='yxjscroll-leftDiv'></div>";
     $(tag).appendTo(dom);

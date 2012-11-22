@@ -141,7 +141,7 @@ $(main_generate.init());
                     'width': thisimg.width() + 'px',
                     'height': thisimg.height() + 'px',
                     'opacity': '1',
-                    'z-index': '3',
+                    'z-index': '16',
                     '-webkit-transform': 'matrix(' + width + ',0,0,' + height + ',-' + l + ',-' + t + ')'
                 });
                 showIndex = thisimg.attr('index');
@@ -157,7 +157,7 @@ $(main_generate.init());
                 });
             } else {
                 $('.detail').css({
-                    'z-index': '4'
+                    'z-index': '24'
                 });
                 showDetails(showIndex);
             }
@@ -244,7 +244,7 @@ function hideAnimation() {
         'z-index': '-1'
     });
     $('#showanimation').css({
-        'z-index': '3',
+        'z-index': '16',
         "-webkit-transform": "matrix(1,0,0,1,0,0)"
     });
 }

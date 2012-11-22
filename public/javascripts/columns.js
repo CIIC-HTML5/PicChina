@@ -13,7 +13,7 @@ var titleDivSize = 30;//标题层的高度
 var barDivLeftMargin = 15;//手柄层距左侧的距离
 var barBottomMargin = 0;//手柄层距底部的距离
 var parentZindex = -5;//父层的Z—INDEX
-var childZindex = 2;//子层的Z—INDEX
+var childZindex = 14;//子层的Z—INDEX
 var barUrl = "images/bar.png";//bar图片的本地地址
 var barImgWidth = 15;//bar图片的宽度
 var barImgHeight = 15;//bar图片的高度
@@ -149,7 +149,7 @@ function setAnimate(bar, parent, malte) {
             if (flag == 0) {
                 $(parent).css({"-webkit-transform":"translate3d(0px," + childDivHeight + "px,0px)",
                     "-ms-transform":"translate3d(0px," + childDivHeight + "px,0px)"});
-                $(malte).css("z-index", 2);
+                $(malte).css("z-index",14);
                 $(malte).css("opacity", ".5");
                 setMatteTouchEvent(malte);
                 flag = 1;
@@ -160,7 +160,7 @@ function setAnimate(bar, parent, malte) {
                 $(malte).off("touchstart touchmove touchend MSPointerDown MSPointerMove MSPointerUp");
                 $(malte).on('webkitTransitionEnd msTransitionEnd', function () {
                     if (flag == 1)
-                        $(malte).css("z-index", 2);
+                        $(malte).css("z-index", 14);
                     else
                         $(malte).css("z-index", -5);
                 });
@@ -185,7 +185,7 @@ function setImgTouchs(dom, bar, url) {
         $("#columns-matte").off("touchstart touchmove touchend MSPointerDown MSPointerMove MSPointerUp");
         $("#columns-matte").on('webkitTransitionEnd msTransitionEnd', function () {
             if (flag == 1)
-                $("#columns-matte").css("z-index", 2);
+                $("#columns-matte").css("z-index", 14);
             else
                 $("#columns-matte").css("z-index", -5);
         });

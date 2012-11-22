@@ -230,7 +230,7 @@ var yxj_detail = {};
                     } else {
                         setTransform("#yxjtop", 100);
                         setTransform("#yxjbottom", -150);
-                        $("#yxjdetail").css("z-index", "1");
+                        $("#yxjdetail").css("z-index", "22");
                         setOpacity("#yxjdetail", 0.5);
                     }
                 }
@@ -324,7 +324,7 @@ var yxj_detail = {};
 //        $(".detail").on("webkitTransitionEnd",function(e){
 
         setTransform("#yxjbottom", -150);
-        $("#yxjdetail").css("z-index", "1");
+        $("#yxjdetail").css("z-index", "22");
         setOpacity("#yxjdetail", 0.5);
         flag = 1;
 //        });
